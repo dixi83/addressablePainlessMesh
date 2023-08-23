@@ -34,10 +34,12 @@ class Mesh : public painlessmesh::Mesh<Connection> {
    * to 5555 if not specified.
    * @param connectMode Switch between WIFI_AP, WIFI_STA and WIFI_AP_STA
    * (default) mode
+   * @param address set the node its nodeId, set it to 0 for determining it by 
+   * its mac address
    */
   void init(TSTRING ssid, TSTRING password, uint16_t port = 5555,
-            WiFiMode_t connectMode = WIFI_AP_STA, uint8_t channel = 1,
-            uint8_t hidden = 0, uint8_t maxconn = MAX_CONN) {
+            WiFiMode_t connectMode = WIFI_AP_STA, uint8_t channel = 1, 
+            address = 0, uint8_t hidden = 0, uint8_t maxconn = MAX_CONN) {
     using namespace logger;
     // Init random generator seed to generate delay variance
     randomSeed(millis());
@@ -61,11 +63,15 @@ class Mesh : public painlessmesh::Mesh<Connection> {
     _meshMaxConn = maxconn;
     _meshPort = port;
 
-    uint8_t MAC[] = {0, 0, 0, 0, 0, 0};
-    if (WiFi.softAPmacAddress(MAC) == 0) {
-      Log(ERROR, "init(): WiFi.softAPmacAddress(MAC) failed.\n");
+    if (address > 0) {
+      nodeId = address;
+    } else {
+      uint8_t MAC[] = {0, 0, 0, 0, 0, 0};
+      if (WiFi.softAPmacAddress(MAC) == 0) {
+        Log(ERROR, "init(): WiFi.softAPmacAddress(MAC) failed.\n");
+      }
+      uint32_t nodeId = tcp::encodeNodeId(MAC);
     }
-    uint32_t nodeId = tcp::encodeNodeId(MAC);
     if (nodeId == 0) Log(ERROR, "NodeId set to 0\n");
 
     this->init(nodeId);

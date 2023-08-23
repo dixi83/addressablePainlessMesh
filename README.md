@@ -1,5 +1,7 @@
-This is a "Fork" from https://gitlab.com/painlessMesh/painlessMesh
-I wanted to be able to determine the NodeID fixed or (my actual goal) by some jumper switches to have predictable publisher names. Instead have it determined by system_get_chip_id()...
+# addressablePainlessMesh
+
+This is a "Fork" from <https://gitlab.com/painlessMesh/painlessMesh>
+I wanted to be able to determine the NodeID hardcoded or (my actual goal) by some jumper switches. I need this to have a predictable publisher name set by you. Instead have it determined by `system_get_chip_id()`...
 
 # Intro to painlessMesh
 
