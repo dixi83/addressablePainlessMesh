@@ -1,3 +1,6 @@
+This is a "Fork" from https://gitlab.com/painlessMesh/painlessMesh
+I wanted to be able to determine the NodeID fixed or (my actual goal) by some jumper switches to have predictable publisher names. Instead have it determined by system_get_chip_id()...
+
 # Intro to painlessMesh
 
 painlessMesh is a library that takes care of the particulars of creating a simple mesh network using esp8266 and esp32 hardware.  The goal is to allow the programmer to work with a mesh network without having to worry about how the network is structured or managed.
