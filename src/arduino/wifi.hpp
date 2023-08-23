@@ -39,7 +39,7 @@ class Mesh : public painlessmesh::Mesh<Connection> {
    */
   void init(TSTRING ssid, TSTRING password, uint16_t port = 5555,
             WiFiMode_t connectMode = WIFI_AP_STA, uint8_t channel = 1, 
-            address = 0, uint8_t hidden = 0, uint8_t maxconn = MAX_CONN) {
+            uint16_t address = 0, uint8_t hidden = 0, uint8_t maxconn = MAX_CONN) {
     using namespace logger;
     // Init random generator seed to generate delay variance
     randomSeed(millis());
@@ -108,10 +108,10 @@ class Mesh : public painlessmesh::Mesh<Connection> {
    */
   void init(TSTRING ssid, TSTRING password, Scheduler *baseScheduler,
             uint16_t port = 5555, WiFiMode_t connectMode = WIFI_AP_STA,
-            uint8_t channel = 1, uint8_t hidden = 0,
+            uint8_t channel = 1, uint16_t address = 0, uint8_t hidden = 0,
             uint8_t maxconn = MAX_CONN) {
     this->setScheduler(baseScheduler);
-    init(ssid, password, port, connectMode, channel, hidden, maxconn);
+    init(ssid, password, port, connectMode, channel, address, hidden, maxconn);
   }
 
   /**
